@@ -1,7 +1,8 @@
-package com.skreep.cleanarchitectureproject
+package com.skreep.cleanarchitectureproject.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.skreep.cleanarchitectureproject.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
