@@ -6,7 +6,7 @@ import com.skreep.cleanarchitectureproject.domain.models.SaveUser
 
 interface UserRepository {
 
-    fun saveUserName(saveParam: SaveUser) : String
+    fun saveUserName(saveParam: SaveUser) : Boolean
 
-    fun getUserName(getUser: GetUserName) : String
+
 }

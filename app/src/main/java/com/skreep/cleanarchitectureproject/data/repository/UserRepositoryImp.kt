@@ -14,14 +14,11 @@ class UserRepositoryImp(context: Context) : UserRepository {
 
     private val sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
 
-
-    override fun saveUserName(saveParam: SaveUser): String {
-        TODO("Not yet implemented")
+    override fun saveUserName(saveParam: SaveUser): Boolean {
+        sharedPreferences.edit().putString(KEY_FIRST_NAME, saveParam.name).apply()
+        return true
     }
 
-    override fun getUserName(getUser: GetUserName): String {
-        val name = sharedPreferences.getString(KEY_FIRST_NAME, "") ?: ""
 
-        return GetUserName(name = name).toString()
-    }
+
 }
