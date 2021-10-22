@@ -1,4 +1,5 @@
 package com.skreep.cleanarchitectureproject.domain.models
 
-class UserName {
+class GetUserName (val name: String) {
+
 }
