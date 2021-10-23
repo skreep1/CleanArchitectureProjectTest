@@ -8,5 +8,6 @@ interface UserRepository {
 
     fun saveUserName(saveParam: SaveUser) : String
 
+    fun getUserName() : GetUserName
 
 }

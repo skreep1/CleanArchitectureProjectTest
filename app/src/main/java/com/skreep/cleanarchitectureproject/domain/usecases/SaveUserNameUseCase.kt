@@ -5,8 +5,8 @@ import com.skreep.cleanarchitectureproject.domain.repository.UserRepository
 
 class SaveUserNameUseCase(private val userRepository: UserRepository) {
 
-    fun execute(param: SaveUser): String {
-        val result: String = userRepository.saveUserName(saveParam = param).toString()
+    fun execute(paramSave: SaveUser): String {
+        val result: String = userRepository.saveUserName(saveParam = paramSave)
         return result
     }
 }
