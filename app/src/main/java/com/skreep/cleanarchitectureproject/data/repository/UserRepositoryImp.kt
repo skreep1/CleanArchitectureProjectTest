@@ -8,21 +8,18 @@ import com.skreep.cleanarchitectureproject.domain.repository.UserRepository
 private const val SHARED_PREFS_NAME = "shared_prefs_name"
 private const val KEY_SAVE_NAME = "save_name"
 private const val SAVE_MESSAGE = "Вы сохранили свое имя"
-private const val NAME = "name"
-
 
 class UserRepositoryImp(context: Context) : UserRepository {
 
     private val sharedPreferences = context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
 
     override fun saveUserName(saveParam: SaveUser): String {
-        sharedPreferences.edit().putString(KEY_SAVE_NAME, saveParam.name).toString()
+        sharedPreferences.edit().putString(KEY_SAVE_NAME, saveParam.savename).apply()
         return SAVE_MESSAGE
     }
 
     override fun getUserName(): GetUserName {
-        val name = sharedPreferences.getString(NAME, "") ?: ""
-
+        val name = sharedPreferences.getString(KEY_SAVE_NAME, "") ?: ""
         return GetUserName(name = name)
     }
 

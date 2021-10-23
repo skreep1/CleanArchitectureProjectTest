@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     private val userRepository by lazy { UserRepositoryImp(context = applicationContext)}
-    private val saveUserNameUseСase by lazy { SaveUserNameUseCase(userRepository)}
-    private val getUserNameUseCase by lazy { GetUserNameUseСase(userRepository)}
+    private val saveUserNameUseСase by lazy { SaveUserNameUseCase(userRepository = userRepository)}
+    private val getUserNameUseCase by lazy { GetUserNameUseСase(userRepository = userRepository)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             // save button
             saveButton.setOnClickListener {
                 val text = etName.text.toString()
-                val params = SaveUser(name = text)
+                val params = SaveUser(savename = text)
                 val result: String = saveUserNameUseСase.execute(paramSave = params)
                 tvName.text = result
 
@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             //get button
             getButton.setOnClickListener {
-                val userName: GetUserName = getUserNameUseCase.execute()
-                tvName.text = userName.name
+                val username: GetUserName = getUserNameUseCase.execute()
+                tvName.text = "${username.name}"
             }
         }
 
