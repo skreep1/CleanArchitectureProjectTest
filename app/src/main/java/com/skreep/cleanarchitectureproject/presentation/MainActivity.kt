@@ -2,24 +2,33 @@ package com.skreep.cleanarchitectureproject.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.skreep.cleanarchitectureproject.data.repository.UserRepositoryImp
+import com.skreep.data.repository.UserRepositoryImp
 import com.skreep.cleanarchitectureproject.databinding.ActivityMainBinding
-import com.skreep.cleanarchitectureproject.domain.models.ClearUser
-import com.skreep.cleanarchitectureproject.domain.models.GetUserName
-import com.skreep.cleanarchitectureproject.domain.models.SaveUser
-import com.skreep.cleanarchitectureproject.domain.usecases.ClearUserNameUseCase
-import com.skreep.cleanarchitectureproject.domain.usecases.GetUserNameUseСase
-import com.skreep.cleanarchitectureproject.domain.usecases.SaveUserNameUseCase
+import com.skreep.data.storage.sharedprefs.SharedPrefUserStorage
+import com.skreep.domain.models.ClearUser
+import com.skreep.domain.models.GetUserName
+import com.skreep.domain.models.SaveUser
+import com.skreep.domain.usecases.ClearUserNameUseCase
+import com.skreep.domain.usecases.GetUserNameUseСase
+import com.skreep.domain.usecases.SaveUserNameUseCase
 
 
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
-    private val userRepository by lazy { UserRepositoryImp(context = applicationContext)}
-    private val saveUserNameUseСase by lazy { SaveUserNameUseCase(userRepository = userRepository)}
-    private val getUserNameUseCase by lazy { GetUserNameUseСase(userRepository = userRepository)}
-    private val clearUserNameUseCase by lazy { ClearUserNameUseCase(userRepository = userRepository)}
+
+    private val userRepository by lazy(LazyThreadSafetyMode.NONE) {
+        UserRepositoryImp(userStorage = SharedPrefUserStorage(context = applicationContext))}
+
+    private val saveUserNameUseCase by lazy(LazyThreadSafetyMode.NONE) {
+        SaveUserNameUseCase(userRepository = userRepository)}
+
+    private val getUserNameUseCase by lazy(LazyThreadSafetyMode.NONE) {
+        GetUserNameUseСase(userRepository = userRepository)}
+
+    private val clearUserNameUseCase by lazy(LazyThreadSafetyMode.NONE) {
+        ClearUserNameUseCase(userRepository = userRepository)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             saveButton.setOnClickListener {
                 val text = etName.text.toString()
                 val params = SaveUser(savename = text)
-                val result: String = saveUserNameUseСase.execute(paramSave = params)
+                val result: String = saveUserNameUseCase.execute(paramSave = params)
                 tvName.text = result
 
 

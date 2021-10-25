@@ -1,7 +1,7 @@
-package com.skreep.cleanarchitectureproject.domain.usecases
+package com.skreep.domain.usecases
 
-import com.skreep.cleanarchitectureproject.domain.models.ClearUser
-import com.skreep.cleanarchitectureproject.domain.repository.UserRepository
+import com.skreep.domain.models.ClearUser
+import com.skreep.domain.repository.UserRepository
 
 class ClearUserNameUseCase(private val userRepository: UserRepository) {
 

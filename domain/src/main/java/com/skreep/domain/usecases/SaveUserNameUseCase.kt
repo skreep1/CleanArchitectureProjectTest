@@ -1,7 +1,7 @@
-package com.skreep.cleanarchitectureproject.domain.usecases
+package com.skreep.domain.usecases
 
-import com.skreep.cleanarchitectureproject.domain.models.SaveUser
-import com.skreep.cleanarchitectureproject.domain.repository.UserRepository
+import com.skreep.domain.models.SaveUser
+import com.skreep.domain.repository.UserRepository
 
 class SaveUserNameUseCase(private val userRepository: UserRepository) {
 
