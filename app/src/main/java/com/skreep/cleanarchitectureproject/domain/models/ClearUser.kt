@@ -1,4 +1,5 @@
 package com.skreep.cleanarchitectureproject.domain.models
 
-class CleanUser {
+class ClearUser(val clearUser: String) {
+
 }
