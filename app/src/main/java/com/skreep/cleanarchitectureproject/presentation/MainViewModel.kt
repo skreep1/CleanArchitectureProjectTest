@@ -1,8 +1,7 @@
 package com.skreep.cleanarchitectureproject.presentation
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.skreep.data.repository.UserRepositoryImp
-import com.skreep.data.storage.sharedprefs.SharedPrefUserStorage
 import com.skreep.domain.models.ClearUser
 import com.skreep.domain.models.GetUserName
 import com.skreep.domain.models.SaveUser
@@ -15,22 +14,20 @@ class MainViewModel(
     private val getUserNameUseCase:GetUserNameUseСase,
     private val clearUserNameUseCase:ClearUserNameUseCase): ViewModel() {
 
-    override fun onCleared() {
-        super.onCleared()
-    }
+    val livedata = MutableLiveData<String>()
 
-    fun save(text: String): String {
+    fun save(text: String) {
         val params = SaveUser(savename = text)
-        return saveUserNameUseCase.execute(paramSave = params)
+        livedata.value = saveUserNameUseCase.execute(paramSave = params)
     }
 
-    fun load () : String {
+    fun load () {
         val username: GetUserName = getUserNameUseCase.execute()
-        return "${username.name}"
+        livedata.value = username.name
     }
 
-    fun clear(text: String): String {
+    fun clear(text: String) {
         val params = ClearUser(clearUser = text)
-        return clearUserNameUseCase.execute(clearUser = params)
+        livedata.value =  clearUserNameUseCase.execute(clearUser = params)
     }
 }

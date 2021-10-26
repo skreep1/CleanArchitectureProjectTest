@@ -40,10 +40,14 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-rc01")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-rc01")
+    //viewmodel not use 2.4.0-rc01 have minsdk(31)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha03")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0-alpha03")
+
+    //module
     implementation project(path: ':domain')
     implementation project(path: ':data')
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'

@@ -2,6 +2,7 @@ package com.skreep.cleanarchitectureproject.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.skreep.data.repository.UserRepositoryImp
 import com.skreep.cleanarchitectureproject.databinding.ActivityMainBinding
@@ -22,25 +23,32 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this, MainViewModelFactory(this)
+        )[MainViewModel::class.java]
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
 
+        //подписка на изменение данных
+        viewModel.livedata.observe(this, Observer {
+            binding.tvName.text = it
+        })
+
+
         binding.apply {
             // save button
             saveButton.setOnClickListener {
                 val text = etName.text.toString()
-                tvName.text = viewModel.save(text = text)
+               viewModel.save(text = text)
             }
         }
 
         binding.apply {
             //get button
             getButton.setOnClickListener {
-                tvName.text = viewModel.load()
+                viewModel.load()
             }
         }
 
@@ -48,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             //clear button
             clearButton.setOnClickListener {
                 val text = etName.text.toString()
-                tvName.text = viewModel.clear(text = text)
+               viewModel.clear(text = text)
             }
         }
 
